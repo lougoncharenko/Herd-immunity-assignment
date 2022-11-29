@@ -57,19 +57,3 @@ if __name__ == "__main__":
             did_not_survive = did_not_survive +1
     print(f'Number of people who did surive: {did_survived}')
     print(f"Number of people who didn't surive: {did_not_survive}")
-
-    # TODO When the loop is complete print your results.
-    # The results should roughly match the mortality rate of the virus
-    # For example if the mortality rate is 0.2 rough 20% of the people 
-    # should succumb. 
-
-    # Stretch challenge! 
-    # Check the infection rate of the virus by making a group of 
-    # unifected people. Loop over all of your people. 
-    # Generate a random number. If that number is less than the 
-    # infection rate of the virus that person is now infected. 
-    # Assign the virus to that person's infection attribute. 
-
-    # Now count the infected and uninfect people from this group of people. 
-    # The number of infectedf people should be roughly the same as the 
-    # infection rate of the virus.
