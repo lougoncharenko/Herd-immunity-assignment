@@ -1,4 +1,7 @@
 class Logger(object):
+    """
+    A helper class for logging all events that happen in the simulation.
+    """
     def __init__(self, file_name):
         """
         Instance properties:
@@ -31,6 +34,12 @@ class Logger(object):
         This shows the starting data including:
         population, initial infected, the virus, and the initial vaccinated.
         """
+        filename = open(self.file_name, "w")
+        filename.write(
+            f"Population Size: {pop_size}, Vaccination Percentage: {vacc_percentage}, Virus: name {virus_name}, mortality rate: {mortality_rate}, basic reproduction number: {basic_repro_num} /n"
+        )
+        filename.close()
+
         # TODO: Finish this method. This line of metadata should be tab-delimited
         # it should create the text file that we will store all logs in.
         # TIP: Use 'w' mode when you open the file. For all other methods, use
