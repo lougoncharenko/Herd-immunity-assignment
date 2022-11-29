@@ -1,21 +1,18 @@
 class Virus(object):
     def __init__(self, name, repro_rate, mortality_rate):
         """
-        Attributes: name, reproduction rate, and mortality rate
-        Properties and attributes of the virus used in Simulation.
+        Instance properties:
+        Name: string
+        Repro_rate: number
+        mortality_rate: number
+        Attributes used in Simulation.
         """
-        # Define the attributes of your your virus
         self.name = name
         self.repro_rate = repro_rate
         self.mortality_rate = mortality_rate
-        # TODO Define the other attributes of Virus
         
-
-
 # Test this class
 if __name__ == "__main__":
-    # Test your virus class by making an instance and confirming 
-    # it has the attributes you defined
     virus = Virus("HIV", 0.8, 0.3)
     assert virus.name == "HIV"
     assert virus.repro_rate == 0.8
