@@ -1,5 +1,10 @@
 class Logger(object):
     def __init__(self, file_name):
+        """
+        Instance properties:
+        File_name: string (full file name where logs will be written to)
+        """
+        self.file_name = file_name
         # TODO:  Finish this initialization method. The file_name passed should be the
         # full file name of the file that the logs will be written to.
         pass
@@ -22,6 +27,10 @@ class Logger(object):
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
+        """
+        This shows the starting data including:
+        population, initial infected, the virus, and the initial vaccinated.
+        """
         # TODO: Finish this method. This line of metadata should be tab-delimited
         # it should create the text file that we will store all logs in.
         # TIP: Use 'w' mode when you open the file. For all other methods, use
@@ -31,6 +40,9 @@ class Logger(object):
         pass
 
     def log_interactions(self, step_number, number_of_interactions, number_of_new_infections):
+        """
+        This method logs the number of interactions, number of new infections and steps
+        """
         # TODO: Finish this method. Think about how the booleans passed (or not passed)
         # represent all the possible edge cases. Use the values passed along with each person,
         # along with whether they are sick or vaccinated when they interact to determine
@@ -38,11 +50,16 @@ class Logger(object):
         pass
 
     def log_infection_survival(self, step_number, population_count, number_of_new_fatalities):
+        """
+        method that logs if the person survived, currrent population count and number of new fatalities
+        """
         # TODO: Finish this method. If the person survives, did_die_from_infection
         # should be False.  Otherwise, did_die_from_infection should be True.
         # Append the results of the infection to the logfile
         pass
 
     def log_time_step(self, time_step_number):
-        # 
+        """
+        This method logs time step number
+        """
         pass
