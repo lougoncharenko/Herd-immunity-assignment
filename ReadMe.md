@@ -10,7 +10,20 @@ _Imagine you have been hired at a new startup focused on health and medicine ---
 
 - This is a python web application that creates a simulation of herd immunity by modeling how a virus moves through a population where some (but not all) of a population is vaccinated against a virus
 
+<br>
 
+## File Structure
+The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
+
+```sh
+Herd-Immunity-Assignment/
+├── logger.py         #  A helper class for logging all events that happen in the simulation.
+├── person.py # Represents the people that make up the population that the virus is spreading through.
+├── simulation.py       # Highest level of abstraction. The main class that runs the entire simulation.
+├── virus.py # Models the properties of the virus we wish to simulate.
+```
+<br>
+<br>
 
 
 ## Simulation Rules
@@ -57,22 +70,30 @@ Let's look at an example:
 <br>
 <br>
 
-## File Structure
-The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
 
-```sh
-Star_Wars_Api/
-├── logger.py         #  A helper class for logging all events that happen in the simulation.
-├── person.py # Represents the people that make up the population that the virus is spreading through.
-├── simulation.py       # Highest level of abstraction. The main class that runs the entire simulation.
-├── virus.py # Models the properties of the virus we wish to simulate.
-```
+
+<!-- CONTRIBUTING -->
+## Contributing
+Contributions are always greatly appreciated as coding is all about refactoring and improving your code. My project is set to public and I am more than happy to accept all contributions. 
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. 
+Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b newFeature`)
+3. Commit your Changes (`git commit -m 'Adding some new features'`)
+4. Push to the Branch (`git push origin newFeature`)
+5. Open a Pull Request
+
+
 <br>
 <br>
 
+<!-- CONTACT -->
+## Contact
 
+Email- louisa.goncharenko@students.dominican.edu
 
-When you run `simulation.py` with the corresponding command-line arguments necessary for a simulation, a simulation object is created. This simulation object then calls the `.run()` method. This method should continually check if the simulation needs to run another step using a helper method contained in the class, and then call `.time_step()` if the simulation has not ended yet. Within the `time_step()` method, you'll find all the logic necessary for actually simulating everything--that is, once you write it. As is, the file just contains a bunch of method stubs, as well as numerous comments for explaining what you need to do to get everything working.
 
 
 
