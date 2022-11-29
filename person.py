@@ -4,12 +4,16 @@ from virus import Virus
 
 
 class Person(object):
-    # Define a person. 
     def __init__(self, _id, is_vaccinated, infection = None):
-        # A person has an id, is_vaccinated and possibly an infection
-        self._id = _id  # int
-        # TODO Define the other attributes of a person here
-        pass
+        """
+        Instance properties:
+        Id: Number
+        is_vaccinated: Boolean
+        infection: instance of virus
+        """
+        self._id = _id 
+        self.is_vaccinated = is_vaccinated
+        self.infection = infection
 
     def did_survive_infection(self):
         # This method checks if a person survived an infection. 
