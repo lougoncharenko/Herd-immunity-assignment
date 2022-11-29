@@ -71,4 +71,6 @@ class Logger(object):
         """
         This method logs time step number
         """
-        pass
+        filename = open(self.file_name, "a")
+        filename.write(f"Time Step Number: {time_step_number}")
+        filename.close()       
