@@ -25,6 +25,11 @@ Herd-Immunity-Assignment/
 <br>
 <br>
 
+## Core Technologies
+- `Python`
+
+## Features
+- 
 
 ## Simulation Rules
 
