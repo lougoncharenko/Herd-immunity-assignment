@@ -36,7 +36,7 @@ class Logger(object):
         """
         filename = open(self.file_name, "w")
         filename.write(
-            f"Population Size: {pop_size}, Vaccination Percentage: {vacc_percentage}, Virus: name {virus_name}, mortality rate: {mortality_rate}, basic reproduction number: {basic_repro_num} /n"
+            f"\t Population Size: {pop_size}, \t Vaccination Percentage: {vacc_percentage}, \t Virus: name {virus_name}, \t mortality rate: {mortality_rate}, \t basic reproduction number: {basic_repro_num} /n"
         )
         filename.close()
 
