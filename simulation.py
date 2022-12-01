@@ -14,21 +14,23 @@ class Simulation(object):
         self.pop_size = pop_size
         self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
-      
-        # You need to store a list of people (Person instances)
-        # Some of these people will be infected some will not. 
-        # Use the _create_population() method to create the list and 
-        # return it storing it in an attribute here. 
+        self.people = list()
         # TODO: Call self._create_population() and pass in the correct parameters.
         pass
 
     def _create_population(self):
+        """
+        Method create a list of people (Person instances).
+        Returns: The list of people
+        """
+        for i in range(0, self.pop_size):
+            person =Person(i, True)
+            self.people.append(person)
         # TODO: Create a list of people (Person instances). This list 
         # should have a total number of people equal to the pop_size. 
         # Some of these people will be uninfected and some will be infected.
         # The number of infected people should be equal to the the initial_infected
-        # TODO: Return the list of people
-        pass
+        return self.people
 
     def _simulation_should_continue(self):
         # This method will return a booleanb indicating if the simulation 
@@ -49,11 +51,10 @@ class Simulation(object):
 
         while should_continue:
             # TODO: Increment the time_step_counter
-            # TODO: for every iteration of this loop, call self.time_step() 
-            # Call the _simulation_should_continue method to determine if 
-            # the simulation should continue
+            time_step_counter = time_step_counter +1
+            self.time_step()
             should_continue = self._simulation_should_continue()
-            pass
+            
 
         # TODO: Write meta data to the logger. This should be starting 
         # statistics for the simulation. It should include the initial
