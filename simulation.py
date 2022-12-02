@@ -33,13 +33,21 @@ class Simulation(object):
         return self.people
 
     def _simulation_should_continue(self):
-        # This method will return a booleanb indicating if the simulation 
-        # should continue. 
-        # The simulation should not continue if all of the people are dead, 
-        # or if all of the living people have been vaccinated. 
-        # TODO: Loop over the list of people in the population. Return True
-        # if the simulation should continue or False if not.
-        pass
+        """
+        Method loops through people list to determine if everyone is dead or vaccinated
+        Returns boolean to determine if the simulation should continue.
+        """
+        for person in self.people:
+            survived = person.did_survive_infection()
+            if survived == True:
+                survived = did_survived = did_survived +1
+            else:
+                did_not_survive = did_not_survive +1
+            if did_not_survive == self.pop_size or person.is_vaccinated == self.pop_size:
+                return False
+            else: 
+                return True
+   
 
     def run(self):
         # This method starts the simulation. It should track the number of 
