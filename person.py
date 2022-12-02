@@ -52,7 +52,7 @@ if __name__ == "__main__":
     for person in people:
         survived = person.did_survive_infection()
         if survived == True:
-            did_survived = did_survived +1
+            survived = did_survived = did_survived +1
         else:
             did_not_survive = did_not_survive +1
     print(f'Number of people who did surive: {did_survived}')
