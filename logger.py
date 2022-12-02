@@ -8,25 +8,6 @@ class Logger(object):
         File_name: string (full file name where logs will be written to)
         """
         self.file_name = file_name
-        # TODO:  Finish this initialization method. The file_name passed should be the
-        # full file name of the file that the logs will be written to.
-        pass
-
-    # The methods below are just suggestions. You can rearrange these or 
-    # rewrite them to better suit your code style. 
-    # What is important is that you log the following information from the simulation:
-    # Meta data: This shows the starting situtation including:
-    #   population, initial infected, the virus, and the initial vaccinated.
-    # Log interactions. At each step there will be a number of interaction
-    # You should log:
-    #   The number of interactions, the number of new infections that occured
-    # You should log the results of each step. This should inlcude: 
-    #   The population size, the number of living, the number of dead, and the number 
-    #   of vaccinated people at that step. 
-    # When the simulation concludes you should log the results of the simulation. 
-    # This should include: 
-    #   The population size, the number of living, the number of dead, the number 
-    #   of vaccinated, and the number of steps to reach the end of the simulation. 
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
