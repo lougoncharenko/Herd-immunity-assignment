@@ -7,7 +7,7 @@ from virus import Virus
 
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
-        self.logger = {}
+        self.logger = Logger('logger.txt')
         # TODO: Create a Logger object and bind it to self.logger.
         # Remember to call the appropriate logger method in the corresponding parts of the simulation.
         self.virus = virus
@@ -55,20 +55,14 @@ class Simulation(object):
         """
         time_step_counter = 0
         should_continue = True
-
+        self.logger.write_metadata()
         while should_continue:
-            # TODO: Increment the time_step_counter
             time_step_counter = time_step_counter +1
             self.time_step()
+            self.logger.log_interactions()
+            self.logger.log_infection_survival()
             should_continue = self._simulation_should_continue()
-            
-
-        # TODO: Write meta data to the logger. This should be starting 
-        # statistics for the simulation. It should include the initial
-        # population size and the virus. 
-        
-        # TODO: When the simulation completes you should conclude this with 
-        # the logger. Send the final data to the logger. 
+        self.logger.log_time_step()
 
     def time_step(self):
         # This method will simulate interactions between people, calulate 
