@@ -14,17 +14,15 @@ class Simulation(object):
         self.pop_size = pop_size
         self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
-        self.people = self._create_population()
-        # TODO: Call self._create_population() and pass in the correct parameters.
-        pass
+        self.people = self._create_population(self.virus)
 
-    def _create_population(self):
+    def _create_population(self, virus):
         """
         Method create a list of people (Person instances).
         Returns: The list of people
         """
         for i in range(0, self.pop_size):
-            person =Person(i, True)
+            person =Person(i, True, self.virus)
             self.people.append(person)
         return self.people
 
