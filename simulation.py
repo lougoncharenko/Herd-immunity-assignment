@@ -63,16 +63,13 @@ class Simulation(object):
         """
         time_step_counter = 0
         should_continue = True
-
         self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate )
         while should_continue:
-            time_step_counter = time_step_counter +1
+            time_step_counter += 1
             self.time_step()
-            self.logger.log_interactions()
-            self.logger.log_infection_survival()
+            self.logger.log_time_step(time_step_counter)
             should_continue = self._simulation_should_continue()
-        self.logger.log_time_step()
-
+        
     def time_step(self):
         # This method will simulate interactions between people, calulate 
         # new infections, and determine if vaccinations and fatalities from infections
@@ -98,6 +95,7 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their infected
             #     attribute can be changed to True at the end of the time step.
         # TODO: Call logger method during this method.
+        # self.logger.log_interactions( )
         pass
 
     def _infect_newly_infected(self):
