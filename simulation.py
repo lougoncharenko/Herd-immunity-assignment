@@ -74,6 +74,7 @@ class Simulation(object):
         This method simulates interactions between people, calulate new infections,
         and determine vaccinations and fatalities from infections
         """
+        # TODO: Call self._infect_newly_infected(self)  at the end of every time step and infect each Person.
         alive_people = []
         infected_people = []
         uninfected_people = []
