@@ -21,14 +21,6 @@ class Logger(object):
         )
         filename.close()
 
-        # TODO: Finish this method. This line of metadata should be tab-delimited
-        # it should create the text file that we will store all logs in.
-        # TIP: Use 'w' mode when you open the file. For all other methods, use
-        # the 'a' mode to append a new log to the end, since 'w' overwrites the file.
-        # NOTE: Make sure to end every line with a '/n' character to ensure that each
-        # event logged ends up on a separate line!
-        pass
-
     def log_interactions(self, step_number, number_of_interactions, number_of_new_infections):
         """
         This method logs the number of interactions, number of new infections and steps
