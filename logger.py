@@ -25,11 +25,8 @@ class Logger(object):
         """
         This method logs the number of interactions, number of new infections and steps
         """
-        # TODO: Finish this method. Think about how the booleans passed (or not passed)
-        # represent all the possible edge cases. Use the values passed along with each person,
-        # along with whether they are sick or vaccinated when they interact to determine
-        # exactly what happened in the interaction and create a String, and write to your logfile.
-        pass
+        filename = open(self.file_name, 'a')
+        filename.write(f'Step number: {step_number}\nInteractions: {number_of_interactions}\nNew Infections: {number_of_new_infections}\n')
 
     def log_infection_survival(self, step_number, population_count, number_of_new_fatalities):
         """
