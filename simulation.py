@@ -63,7 +63,8 @@ class Simulation(object):
         """
         time_step_counter = 0
         should_continue = True
-        self.logger.write_metadata()
+
+        self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate )
         while should_continue:
             time_step_counter = time_step_counter +1
             self.time_step()
