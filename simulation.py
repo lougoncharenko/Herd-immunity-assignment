@@ -76,9 +76,9 @@ class Simulation(object):
         and determine vaccinations and fatalities from infections
         """
         alive_people = []
-        random_people = []
         infected_people = []
         uninfected_people = []
+        random_people = []
         # SEPERATE ALIVE PEOPLE FROM DEAD PEOPLE, Creates infected and uninfected list
         for person in self.people:
             if person.is_alive == True:
@@ -87,7 +87,13 @@ class Simulation(object):
                 uninfected_people.append(person)
             if person.infection is not None:
                 infected_people.append(person)
-
+        print(f"Alive people: {alive_people}, infected people: {infected_people}, uninfected people: {uninfected_people}")
+        
+        if len(alive_people) < 100:
+            random_people = random.choices(alive_people, k=len(alive_people))   
+        else:
+            random_people = random.choices(alive_people, k=100)
+        
         # This method will simulate interactions between people, calulate 
         # new infections, and determine if vaccinations and fatalities from infections
         # The goal here is have each infected person interact with a number of other 
