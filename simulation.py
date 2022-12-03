@@ -93,6 +93,16 @@ class Simulation(object):
             random_people = random.choices(alive_people, k=len(alive_people))   
         else:
             random_people = random.choices(alive_people, k=100)
+
+        if len(infected_people) > len(uninfected_people):
+            for infected_person in infected_people:
+                for uninfected_person in uninfected_people:
+                    self.interaction(infected_person, uninfected_person)
+        else:
+            for uninfected_person in uninfected_people:
+                for infected_person in infected_people:
+                    self.interaction(uninfected_person, infected_person)
+
         
         # This method will simulate interactions between people, calulate 
         # new infections, and determine if vaccinations and fatalities from infections
