@@ -121,11 +121,19 @@ class Simulation(object):
                     self.logger.log_interactions(self.time_step_number, number_of_interactions, number_of_new_infections)
 
     def _infect_newly_infected(self):
+        """
+        Method loops through self.newly_infected to infect each person with the virus and resets 
+        self.newly_infected back to an empty list
+        """
         # TODO: Call this method at the end of every time step and infect each Person.
         # TODO: Once you have iterated through the entire list of self.newly_infected, remember
         # to reset self.newly_infected back to an empty list.
-        pass
+        for person in self.infected_people:
+            if person.is_alive == True:
+                person.infection = self.virus
+                person.did_survive_infection()
 
+        self.newly_infected = []
 
 if __name__ == "__main__":
     # Test your simulation here
