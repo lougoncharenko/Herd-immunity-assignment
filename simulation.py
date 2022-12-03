@@ -71,6 +71,23 @@ class Simulation(object):
             should_continue = self._simulation_should_continue()
         
     def time_step(self):
+        """
+        This method simulates interactions between people, calulate new infections,
+        and determine vaccinations and fatalities from infections
+        """
+        alive_people = []
+        random_people = []
+        infected_people = []
+        uninfected_people = []
+        # SEPERATE ALIVE PEOPLE FROM DEAD PEOPLE, Creates infected and uninfected list
+        for person in self.people:
+            if person.is_alive == True:
+                alive_people.append(person)
+            if person.infection is None:
+                uninfected_people.append(person)
+            if person.infection is not None:
+                infected_people.append(person)
+
         # This method will simulate interactions between people, calulate 
         # new infections, and determine if vaccinations and fatalities from infections
         # The goal here is have each infected person interact with a number of other 
