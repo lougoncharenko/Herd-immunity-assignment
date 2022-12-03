@@ -30,10 +30,15 @@ class Simulation(object):
         Method create a list of people (Person instances).
         Returns: The list of people
         """
-        for i in range(0, self.pop_size):
-            person =Person(i, True, self.virus)
-            self.people.append(person)
-        return self.people
+        people = []
+        for i in range(0, self.initial_infected):
+            infected_people =Person(i, False, self.virus)
+            people.append(infected_people)
+        uninfected_population = self.pop_size - self.initial_infected
+        for i in range(0, uninfected_population):
+            uninfected_people = Person(i, False)
+            people.append(uninfected_people)
+        return people
 
     def _simulation_should_continue(self):
         """
