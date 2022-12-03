@@ -14,7 +14,7 @@ class Simulation(object):
         self.pop_size = pop_size
         self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
-        self.people = list()
+        self.people = self._create_population()
         # TODO: Call self._create_population() and pass in the correct parameters.
         pass
 
@@ -26,10 +26,6 @@ class Simulation(object):
         for i in range(0, self.pop_size):
             person =Person(i, True)
             self.people.append(person)
-        # TODO: Create a list of people (Person instances). This list 
-        # should have a total number of people equal to the pop_size. 
-        # Some of these people will be uninfected and some will be infected.
-        # The number of infected people should be equal to the the initial_infected
         return self.people
 
     def _simulation_should_continue(self):
