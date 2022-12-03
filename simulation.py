@@ -7,14 +7,23 @@ from virus import Virus
 
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
+        """
+        Attributes:
+        self.logger: instance of Logger class
+        virus: instance of Virus class
+        pop_size: integer
+        vacc_percentage: integer
+        initial_infected: integer
+        self.people: list
+        self.newly_infected: list
+        """
         self.logger = Logger('logger.txt')
-        # TODO: Create a Logger object and bind it to self.logger.
-        # Remember to call the appropriate logger method in the corresponding parts of the simulation.
         self.virus = virus
         self.pop_size = pop_size
         self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
         self.people = self._create_population(self.virus)
+        self.newly_infected = list()
 
     def _create_population(self, virus):
         """
