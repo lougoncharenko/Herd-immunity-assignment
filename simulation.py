@@ -90,14 +90,14 @@ class Simulation(object):
         This method simulates interactions between people, calulate new infections,
         and determine vaccinations and fatalities from infections
         """
-        # alive_people = []
-        # infected_people = []
-        # uninfected_people = []
-        # random_people = []
-        # for people in self.population:
+        infected_people = []
+        random_people = []
+        for person in self.people:
+            if person.is_vaccinated == True:
+                self.vaccinated_population.append(person)
+
+       
         # for person in self.people:
-        #     if person.is_alive == True:
-        #         alive_people.append(person)
         #     if person.infection is None:
         #         uninfected_people.append(person)
         #     if person.infection is not None:
@@ -158,4 +158,7 @@ if __name__ == "__main__":
     sim._create_population(virus)
     print('Self.population')
     print(len(sim.people))
+    sim.time_step()
+    print('vacinated pop')
+    print (len(sim.vaccinated_population))
     # sim.run()
