@@ -91,30 +91,22 @@ class Simulation(object):
         and determine vaccinations and fatalities from infections
         """
         infected_people = []
-        random_people = []
         for person in self.people:
-            if person.is_vaccinated == True:
-                self.vaccinated_population.append(person)
-
-       
-        # for person in self.people:
-        #     if person.infection is None:
-        #         uninfected_people.append(person)
-        #     if person.infection is not None:
-        #         infected_people.append(person)
+            if person.infection is not None:
+                infected_people.append(person)
         
-        # if len(alive_people) < 100:
-        #     random_people = random.choices(alive_people, k=len(alive_people))   
-        # else:
-        #     random_people = random.choices(alive_people, k=100)
+        while len(infected_people) > 0:
+            if len(self.people) < 100:
+                random_people = random.choices(self.people, k=len(alive_people))   
+            else:
+                random_people = random.choices(self.people, k=100)
 
-        # for infected_person in infected_people:
-        #     for random_person in random_people:
-        #         self.interaction(infected_person, random_person)
+            for infected_person in infected_people:
+                for random_person in random_people:
+                    self.interaction(infected_person, random_person)
 
-        # self._infect_newly_infected() 
-        pass
-
+        self._infect_newly_infected() 
+        
 
     def interaction(self, infected_person, random_person):
         number_of_interactions = 0
@@ -132,11 +124,25 @@ class Simulation(object):
         Method loops through self.newly_infected to infect each person with the virus and resets 
         self.newly_infected back to an empty list
         """
+        number_of_new_fatalities = 0
+
         for person in self.newly_infected:
             if person.is_alive == True:
                 person.infection = self.virus
-                person.did_survive_infection()
-
+                survived = person.did_survive_infection()
+            if survived:
+                self.vaccinated_population.append(person)
+            else: 
+                number_of_new_fatalities += 1
+                self.pop_size -= 1
+                self.fatalities.append(person)
+    
+        alive_population = []
+        for person in self.people:
+             if person not in self.fatalities
+                alive_population.append(person)
+        self.people = alive_population
+        self.logger.log_infection_survival(self.time_step_number, self.pop_size, number_of_new_fatalities )
         self.newly_infected = []
 
 if __name__ == "__main__":
