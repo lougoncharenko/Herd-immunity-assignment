@@ -26,7 +26,7 @@ class Logger(object):
         This method logs the number of interactions, number of new infections and steps
         """
         filename = open(self.file_name, 'a')
-        filename.write(f '\t Step number: {step_number} \t Interactions: {number_of_interactions} \t New Infections: {number_of_new_infections}\n')
+        filename.write(f" \t Step number: {step_number} \t Interactions: {number_of_interactions} \t New Infections: {number_of_new_infections} \n")
         filename.close()
 
     def log_infection_survival(self, step_number, population_count, number_of_new_fatalities):
@@ -35,7 +35,7 @@ class Logger(object):
         """
         filename = open(self.file_name, "a")
         death_total = 0
-        for person in number_of_new_fatalities
+        for person in number_of_new_fatalities:
              if not person.is_alive:
                  death_total += 1
         file_name.write(f"  \t Step Number: {step_number}  \t Population count: {population_count}  \t  Death Total: {death_total} \n")

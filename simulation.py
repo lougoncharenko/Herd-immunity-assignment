@@ -23,6 +23,7 @@ class Simulation(object):
         self.initial_infected = initial_infected
         self.people = self._create_population(self.virus)
         self.newly_infected = list()
+        self.vaccinated = []
         self.time_step_number = 0
 
     def _create_population(self, virus):
@@ -31,13 +32,16 @@ class Simulation(object):
         Returns: The list of people
         """
         people = []
+        infected_people = []
+        uninfected_people = []
         for i in range(0, self.initial_infected):
-            infected_people =Person(i, False, self.virus)
-            people.append(infected_people)
+            infected_person =Person(i, False, self.virus)
+            infected_people.append(infected_person)
+
         uninfected_population = self.pop_size - self.initial_infected
         for i in range(0, uninfected_population):
-            uninfected_people = Person(i, False)
-            people.append(uninfected_people)
+            uninfected_person = Person(i, False)
+            uninfected_people.append(uninfected_person)
         return people
 
     def _simulation_should_continue(self):
@@ -45,16 +49,11 @@ class Simulation(object):
         Method loops through people list to determine if everyone is dead or vaccinated
         Returns boolean to determine if the simulation should continue.
         """
-        for person in self.people:
-            survived = person.did_survive_infection()
-            if survived == True:
-                survived = did_survived = did_survived +1
-            else:
-                did_not_survive = did_not_survive +1
-            if did_not_survive == self.pop_size or person.is_vaccinated == self.pop_size:
-                return False
-            else: 
-                return True
+        vaccinated_person = len(self.people.is_vaccinated)
+        alive_population = self.pop_size
+        while unvaccinated_population > 0 and alive_population > 0:
+            return True
+        return False
    
 
     def run(self):
@@ -66,7 +65,7 @@ class Simulation(object):
         while should_continue:
             self.time_step_number += 1
             self.time_step()
-            self.logger.log_time_step(time_step_counter)
+            self.logger.log_time_step(self.time_step_number)
             should_continue = self._simulation_should_continue()
         
     def time_step(self):
@@ -149,7 +148,7 @@ if __name__ == "__main__":
     initial_infected = 10
 
     # Make a new instance of the imulation
-    virus = Virus(virus, pop_size, vacc_percentage, initial_infected)
-    sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    virus = Virus(pop_size, vacc_percentage, initial_infected)
+    sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
 
-    # sim.run()
+    sim.run()
