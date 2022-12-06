@@ -56,7 +56,7 @@ class Simulation(object):
         Method loops through people list to determine if everyone is dead or vaccinated
         Returns boolean to determine if the simulation should continue.
         """
-        vaccinated_person = len(self.people.is_vaccinated)
+        unvaccinated_population = self.pop_size - len(self.vaccinated_population)
         alive_population = self.pop_size
         while unvaccinated_population > 0 and alive_population > 0:
             return True
@@ -68,6 +68,7 @@ class Simulation(object):
         Method starts the simulation and tracks the number of steps the simulation has run.
         """
         should_continue = True
+
         self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate )
         while should_continue:
             self.time_step_number += 1
@@ -80,12 +81,11 @@ class Simulation(object):
         This method simulates interactions between people, calulate new infections,
         and determine vaccinations and fatalities from infections
         """
-        # TODO: Call self._infect_newly_infected(self)  at the end of every time step and infect each Person.
         alive_people = []
         infected_people = []
         uninfected_people = []
         random_people = []
-        # SEPERATE ALIVE PEOPLE FROM DEAD PEOPLE, Creates infected and uninfected list
+        
         for person in self.people:
             if person.is_alive == True:
                 alive_people.append(person)
@@ -93,7 +93,6 @@ class Simulation(object):
                 uninfected_people.append(person)
             if person.infection is not None:
                 infected_people.append(person)
-        print(f"Alive people: {alive_people}, infected people: {infected_people}, uninfected people: {uninfected_people}")
         
         if len(alive_people) < 100:
             random_people = random.choices(alive_people, k=len(alive_people))   
@@ -104,17 +103,8 @@ class Simulation(object):
             for random_person in random_people:
                 self.interaction(infected_person, random_person)
 
-        
-        # This method will simulate interactions between people, calulate 
-        # new infections, and determine if vaccinations and fatalities from infections
-        # The goal here is have each infected person interact with a number of other 
-        # people in the population
-        # TODO: Loop over your population
-        # For each person if that person is infected
-        # have that person interact with 100 other living people 
-        # Run interactions by calling the interaction method below. That method
-        # takes the infected person and a random person
-        pass
+        self._infect_newly_infected() 
+
 
     def interaction(self, infected_person, random_person):
         number_of_interactions = 0
@@ -132,9 +122,6 @@ class Simulation(object):
         Method loops through self.newly_infected to infect each person with the virus and resets 
         self.newly_infected back to an empty list
         """
-        # TODO: Call this method at the end of every time step and infect each Person.
-        # TODO: Once you have iterated through the entire list of self.newly_infected, remember
-        # to reset self.newly_infected back to an empty list.
         for person in self.infected_people:
             if person.is_alive == True:
                 person.infection = self.virus
