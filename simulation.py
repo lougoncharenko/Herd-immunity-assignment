@@ -22,8 +22,8 @@ class Simulation(object):
         self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
         self.people = self._create_population(self.virus)
-        self.newly_infected = list()
-        self.vaccinated_population = list()
+        self.newly_infected = []
+        self.vaccinated_population = []
         self.time_step_number = 0
 
     def _create_population(self, virus):
@@ -34,14 +34,21 @@ class Simulation(object):
         people = []
         infected_people = []
         uninfected_people = []
-        for i in range(0, self.initial_infected):
-            infected_person =Person(i, False, self.virus)
+
+        for i in range (0, self.initial_infected):
+            infected_person = Person (i, False, self.virus)
             infected_people.append(infected_person)
 
         uninfected_population = self.pop_size - self.initial_infected
         for i in range(0, uninfected_population):
             uninfected_person = Person(i, False)
             uninfected_people.append(uninfected_person)
+        
+        print ('infected people')
+        print(len(infected_people))
+        print("uninfected_people")
+        print(len(uninfected_people))
+      
 
         people = uninfected_people + infected_people
 
@@ -49,6 +56,7 @@ class Simulation(object):
             if person.is_vaccinated:
                 self.vaccinated_population(person)
 
+        print(len(people))
         return people
 
     def _simulation_should_continue(self):
@@ -56,9 +64,9 @@ class Simulation(object):
         Method loops through people list to determine if everyone is dead or vaccinated
         Returns boolean to determine if the simulation should continue.
         """
-        unvaccinated_population = self.pop_size - len(self.vaccinated_population)
+        unvacinated_population = self.popsize - len(self.vaccinated_population)
         alive_population = self.pop_size
-        while unvaccinated_population > 0 and alive_population > 0:
+        unvaccinated_population > 0 and alive_population > 0:
             return True
         return False
    
@@ -122,7 +130,7 @@ class Simulation(object):
         Method loops through self.newly_infected to infect each person with the virus and resets 
         self.newly_infected back to an empty list
         """
-        for person in self.infected_people:
+        for person in self.newly_infected:
             if person.is_alive == True:
                 person.infection = self.virus
                 person.did_survive_infection()
@@ -144,5 +152,6 @@ if __name__ == "__main__":
     # Make a new instance of the imulation
     virus = Virus(pop_size, vacc_percentage, initial_infected)
     sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
-
-    sim.run()
+    
+    sim._create_population(virus)
+    # sim.run()
