@@ -23,7 +23,7 @@ class Simulation(object):
         self.initial_infected = initial_infected
         self.people = self._create_population(self.virus)
         self.newly_infected = list()
-        self.vaccinated = []
+        self.vaccinated_population = list()
         self.time_step_number = 0
 
     def _create_population(self, virus):
@@ -42,6 +42,13 @@ class Simulation(object):
         for i in range(0, uninfected_population):
             uninfected_person = Person(i, False)
             uninfected_people.append(uninfected_person)
+
+        people = uninfected_people + infected_people
+
+        for person in people:
+            if person.is_vaccinated:
+                self.vaccinated_population(person)
+
         return people
 
     def _simulation_should_continue(self):
