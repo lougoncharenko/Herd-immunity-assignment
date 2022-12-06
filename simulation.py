@@ -57,7 +57,8 @@ class Simulation(object):
                 self.vaccinated_population(person)
 
         print(len(people))
-        return people
+        self.people = people
+        return self.people
 
     def _simulation_should_continue(self):
         """
@@ -66,7 +67,7 @@ class Simulation(object):
         """
         unvacinated_population = self.popsize - len(self.vaccinated_population)
         alive_population = self.pop_size
-        unvaccinated_population > 0 and alive_population > 0:
+        while unvaccinated_population > 0 and alive_population > 0:
             return True
         return False
    
@@ -89,29 +90,30 @@ class Simulation(object):
         This method simulates interactions between people, calulate new infections,
         and determine vaccinations and fatalities from infections
         """
-        alive_people = []
-        infected_people = []
-        uninfected_people = []
-        random_people = []
+        # alive_people = []
+        # infected_people = []
+        # uninfected_people = []
+        # random_people = []
+        # for people in self.population:
+        # for person in self.people:
+        #     if person.is_alive == True:
+        #         alive_people.append(person)
+        #     if person.infection is None:
+        #         uninfected_people.append(person)
+        #     if person.infection is not None:
+        #         infected_people.append(person)
         
-        for person in self.people:
-            if person.is_alive == True:
-                alive_people.append(person)
-            if person.infection is None:
-                uninfected_people.append(person)
-            if person.infection is not None:
-                infected_people.append(person)
-        
-        if len(alive_people) < 100:
-            random_people = random.choices(alive_people, k=len(alive_people))   
-        else:
-            random_people = random.choices(alive_people, k=100)
+        # if len(alive_people) < 100:
+        #     random_people = random.choices(alive_people, k=len(alive_people))   
+        # else:
+        #     random_people = random.choices(alive_people, k=100)
 
-        for infected_person in infected_people:
-            for random_person in random_people:
-                self.interaction(infected_person, random_person)
+        # for infected_person in infected_people:
+        #     for random_person in random_people:
+        #         self.interaction(infected_person, random_person)
 
-        self._infect_newly_infected() 
+        # self._infect_newly_infected() 
+        pass
 
 
     def interaction(self, infected_person, random_person):
@@ -154,4 +156,6 @@ if __name__ == "__main__":
     sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
     
     sim._create_population(virus)
+    print('Self.population')
+    print(len(sim.people))
     # sim.run()
