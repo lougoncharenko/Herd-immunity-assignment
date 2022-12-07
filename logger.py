@@ -34,11 +34,7 @@ class Logger(object):
         method that logs if the person survived, currrent population count and number of new fatalities
         """
         filename = open(self.file_name, "a")
-        death_total = 0
-        for person in number_of_new_fatalities:
-             if not person.is_alive:
-                 death_total += 1
-        file_name.write(f"  \t Step Number: {step_number}  \t Population count: {population_count}  \t  Death Total: {death_total} \n")
+        filename.write(f"  \t Step Number: {step_number}  \t Population count: {population_count}  \t  Death Total: {number_of_new_fatalities} \n")
         filename.close()
 
     def log_time_step(self, time_step_number):
