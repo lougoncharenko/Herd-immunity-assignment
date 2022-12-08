@@ -47,10 +47,6 @@ class Simulation(object):
             uninfected_people.append(uninfected_person)
         people = uninfected_people + infected_people
 
-        for person in people:
-            if person.is_vaccinated:
-                self.vaccinated_population(person)
-
         self.people = people
         return self.people
 
@@ -71,8 +67,7 @@ class Simulation(object):
             return True
         else:
             return False
-   
-
+  
     def run(self):
         """
         Method starts the simulation and tracks the number of steps the simulation has run.
@@ -92,6 +87,7 @@ class Simulation(object):
         This method simulates interactions between people, calulate new infections,
         and determine vaccinations and fatalities from infections
         """
+        print(f'mortality_rate {self.virus.mortality_rate}')
         if len(self.people) < 100:
             random_people = random.sample(self.people, k=len(self.pop_size))   
         else:
@@ -99,26 +95,31 @@ class Simulation(object):
 
         number_of_interactions = 0
         for person in self.people:
-           if person.infection:
+           if person.infection is not None:
                 for random_person in random_people:
                     self.interaction(person, random_person)
                     number_of_interactions += 1
                     number_of_new_infections = len(self.newly_infected)
                     self.logger.log_interactions(self.time_step_number, number_of_interactions, number_of_new_infections)
-                death = random.randint(0.0, 1.0)
-                if 
+                death = random.randint(0, 1)
+                if death < self.virus.mortality_rate:
+                    person.is_alive = False
+                    self.fatalities.append(person)
+                    self.people.remove(person)
+                else: 
+                    person.is_vaccinated = True
+                    person.infection = None
+                    self.vaccinated_population.append(person)
+                    self.people.remove(person)
         self._infect_newly_infected() 
         
 
     def interaction(self, infected_person, random_person):
         if (random_person.infection == None) and (not random_person.is_vaccinated):
                 random_number = random.randint(0.0, 1.0)
-                if random_number > self.virus.repro_rate:
+                if random_number < self.virus.repro_rate:
                     self.newly_infected.append(random_person)
                     
-                
-                    
-
     def _infect_newly_infected(self):
         """
         Method loops through self.newly_infected to infect each person with the virus and resets 
@@ -126,7 +127,6 @@ class Simulation(object):
         """
         for person in self.newly_infected:
                 person.infection = self.virus
-        
         self.newly_infected = []
 
 if __name__ == "__main__":
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     cli_simulation = Simulation(cli_virus, cli_pop_size, cli_vacc_percentage, cli_initial_infected)
     cli_simulation.run()
     print(f'Starting poulation: {cli_pop_size}')
-    print(f"pop-size {cli_simulation.pop_size}")
+    print (f'self.people {len(cli_simulation.people)}')
     print(f'Fatalities total: {len(cli_simulation.fatalities)}')
     print(f'Vaccinated population: {len(cli_simulation.vaccinated_population)} ')
     print('Simulation Complete')
