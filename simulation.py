@@ -1,8 +1,8 @@
-import random, sys
+import random, sys, math, argparse
 from person import Person
 from logger import Logger
 from virus import Virus
-import argparse
+
 
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
@@ -51,7 +51,6 @@ class Simulation(object):
             if person.is_vaccinated:
                 self.vaccinated_population(person)
 
-        print(len(people))
         self.people = people
         return self.people
 
@@ -94,64 +93,51 @@ class Simulation(object):
         and determine vaccinations and fatalities from infections
         """
         if len(self.people) < 100:
-            random_people = random.choices(self.people, k=len(alive_people))   
+            random_people = random.sample(self.people, k=len(self.pop_size))   
         else:
-            random_people = random.choices(self.people, k=100)
+            random_people = random.sample(self.people, k=100)
 
+        number_of_interactions = 0
         for person in self.people:
            if person.infection:
                 for random_person in random_people:
                     self.interaction(person, random_person)
-
+                    number_of_interactions += 1
+                    number_of_new_infections = len(self.newly_infected)
+                    self.logger.log_interactions(self.time_step_number, number_of_interactions, number_of_new_infections)
+                death = random.randint(0.0, 1.0)
+                if 
         self._infect_newly_infected() 
         
 
     def interaction(self, infected_person, random_person):
-        number_of_interactions = 0
-        if random_person.is_vaccinated == False:
-            if random_person.infection is None:
+        if (random_person.infection == None) and (not random_person.is_vaccinated):
                 random_number = random.randint(0.0, 1.0)
                 if random_number > self.virus.repro_rate:
-                    number_of_interactions += 1
                     self.newly_infected.append(random_person)
-                    number_of_new_infections = len(self.newly_infected)
-                    self.logger.log_interactions(self.time_step_number, number_of_interactions, number_of_new_infections)
+                    
+                
+                    
 
     def _infect_newly_infected(self):
         """
         Method loops through self.newly_infected to infect each person with the virus and resets 
         self.newly_infected back to an empty list
         """
-        number_of_new_fatalities = 0
-
         for person in self.newly_infected:
-            if person.is_alive == True:
                 person.infection = self.virus
-                survived = person.did_survive_infection()
-            if survived:
-                self.vaccinated_population.append(person)
-            else: 
-                number_of_new_fatalities += 1
-                self.pop_size -= 1
-                self.fatalities.append(person)
-    
-        alive_population = []
-        for person in self.people:
-             if person not in self.fatalities:
-                alive_population.append(person)
-        self.people = alive_population
-        self.logger.log_infection_survival(self.time_step_number, self.pop_size, number_of_new_fatalities )
+        
         self.newly_infected = []
 
 if __name__ == "__main__":
     #parse CLI arguments
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('pop_size', metavar='population size', type=int, help='Enter a number for the population size: ')
-    parser.add_argument('vacc_percentage', metavar='vacc_percentage', type=float, help='Enter a decimal number without the percent sign for the the vaccination percentage: ')
-    parser.add_argument('virus_name', metavar='virus', type=str, help='Enter a name for the virus: ')
-    parser.add_argument('virus_repro', metavar='virus_repro', type=float, help='Enter a decimal number for the virus reproduction rate: ')
-    parser.add_argument('virus_mortality', metavar='virus_mortality', type=float, help='Enter a decimal number for the virus mortality rate: ')
+    parser.add_argument('pop_size', metavar='population size', type=int, help='Enter a number for the population size:')
+    parser.add_argument('vacc_percentage', metavar='vacc_percentage', type=float, help='Enter a decimal number without the percent sign for the the vaccination percentage:')
+    parser.add_argument('virus_name', metavar='virus', type=str, help='Enter a name for the virus:')
+    parser.add_argument('virus_repro', metavar='virus_repro', type=float, help='Enter a decimal number for the virus reproduction rate:')
+    parser.add_argument('virus_mortality', metavar='virus_mortality', type=float, help='Enter a decimal number for the virus mortality rate:')
     parser.add_argument('initial_infected', metavar='initial_infected', type=int, help='Enter a number for initially infected')
 
     args = parser.parse_args()
@@ -165,3 +151,8 @@ if __name__ == "__main__":
     cli_virus = Virus(cli_virus_name, cli_virus_mortality, cli_virus_repro)
     cli_simulation = Simulation(cli_virus, cli_pop_size, cli_vacc_percentage, cli_initial_infected)
     cli_simulation.run()
+    print(f'Starting poulation: {cli_pop_size}')
+    print(f"pop-size {cli_simulation.pop_size}")
+    print(f'Fatalities total: {len(cli_simulation.fatalities)}')
+    print(f'Vaccinated population: {len(cli_simulation.vaccinated_population)} ')
+    print('Simulation Complete')
