@@ -3,6 +3,18 @@ from person import Person
 from logger import Logger
 from virus import Virus
 
+ #parse CLI arguments
+ parser = argparse.ArgumentParser()
+
+ parser.add_argument('pop_size', metavar='population size', type=int, help='Enter a number for the population size: ')
+parser.add_argument('vacc_percentage', metavar='vacc_percentage', type=float, help='Enter a decimal number without the percent sign for the the vaccination percentage: ')
+parser.add_argument('virus_name', metavar='virus', type=str, help='Enter a name for the virus: ')
+parser.add_argument('virus_repro', metavar='virus_repro', type=float, help='Enter a decimal number for the virus reproduction rate: ')
+parser.add_argument('virus_mortality', metavar='virus_mortality', type=float, help='Enter a decimal number for the virus mortality rate: ')
+parser.add_argument('initial_infected', metavar='initial_infected', type=int, help='Enter a number for initially infected')
+
+args = parser.parse_args()
+
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
         """
@@ -85,7 +97,6 @@ class Simulation(object):
         while should_continue:
             self.time_step_number += 1
             self.time_step()
-            self.logger.log_time_step(self.time_step_number)
             should_continue = self._simulation_should_continue()
         
     def time_step(self):
@@ -158,6 +169,21 @@ if __name__ == "__main__":
     # Make a new instance of the imulation
     virus = Virus(pop_size, vacc_percentage, initial_infected)
     sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
+<<<<<<< HEAD
+    sim.run()
+
+    # use CLI arguments to create simulation:
+    cli_virus_name = args.virus_name
+    cli_virus_repro_rate = args.virus_repro
+    cli_virus_mortality_rate = args.virus_mortality
+    cli_pop_size = args.pop_size
+    cli_vacc_percentage = args.vacc_percentage
+    cli_initial_infected = args.initial_infected
+
+    cli_virus = Virus(cli_virus_name, cli_virus_repro_rate, cli_virus_mortality_rate)
+    cli_simulation = (cli_virus, cli_pop_size, cli_vacc_percentage, cli_initial_infected)
+    cli_simulation.run()
+=======
 
     # # print('Self.population')
     # # print(len(sim.people))
@@ -165,3 +191,4 @@ if __name__ == "__main__":
     # # print('vacinated pop')
     # # print (len(sim.vaccinated_population))
     sim.run()
+>>>>>>> b92507638eef411066d347fd120496ded18a73ca
