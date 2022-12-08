@@ -4,29 +4,6 @@ from logger import Logger
 from virus import Virus
 import argparse
 
- #parse CLI arguments
-parser = argparse.ArgumentParser()
-
-parser.add_argument('pop_size', metavar='population size', type=int, help='Enter a number for the population size: ')
-parser.add_argument('vacc_percentage', metavar='vacc_percentage', type=float, help='Enter a decimal number without the percent sign for the the vaccination percentage: ')
-parser.add_argument('virus_name', metavar='virus', type=str, help='Enter a name for the virus: ')
-parser.add_argument('virus_repro', metavar='virus_repro', type=float, help='Enter a decimal number for the virus reproduction rate: ')
-parser.add_argument('virus_mortality', metavar='virus_mortality', type=float, help='Enter a decimal number for the virus mortality rate: ')
-parser.add_argument('initial_infected', metavar='initial_infected', type=int, help='Enter a number for initially infected')
-
-args = parser.parse_args()
-cli_virus_name = args.virus_name
-cli_virus_repro = args.virus_repro
-cli_virus_mortality = args.virus_mortality
-cli_pop_size = args.pop_size
-cli_vacc_percentage = args.vacc_percentage
-cli_initial_infected = args.initial_infected
-
-
-
-
-
-
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
         """
@@ -167,27 +144,24 @@ class Simulation(object):
         self.newly_infected = []
 
 if __name__ == "__main__":
-    # Test your simulation here
-    # virus_name = "Sniffles"
-    # repro_num = 0.5
-    # mortality_rate = 0.12
-    # virus = Virus(virus_name, repro_num, mortality_rate)
+    #parse CLI arguments
+    parser = argparse.ArgumentParser()
 
-    # # Set some values used by the simulation
-    # pop_size = 1000
-    # vacc_percentage = 0.1
-    # initial_infected = 10
+    parser.add_argument('pop_size', metavar='population size', type=int, help='Enter a number for the population size: ')
+    parser.add_argument('vacc_percentage', metavar='vacc_percentage', type=float, help='Enter a decimal number without the percent sign for the the vaccination percentage: ')
+    parser.add_argument('virus_name', metavar='virus', type=str, help='Enter a name for the virus: ')
+    parser.add_argument('virus_repro', metavar='virus_repro', type=float, help='Enter a decimal number for the virus reproduction rate: ')
+    parser.add_argument('virus_mortality', metavar='virus_mortality', type=float, help='Enter a decimal number for the virus mortality rate: ')
+    parser.add_argument('initial_infected', metavar='initial_infected', type=int, help='Enter a number for initially infected')
 
-    # # Make a new instance of the imulation
-    # virus = Virus(pop_size, vacc_percentage, initial_infected)
-    # sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
+    args = parser.parse_args()
+    cli_virus_name = args.virus_name
+    cli_virus_repro = args.virus_repro
+    cli_virus_mortality = args.virus_mortality
+    cli_pop_size = args.pop_size
+    cli_vacc_percentage = args.vacc_percentage
+    cli_initial_infected = args.initial_infected
 
-    # # # print('Self.population')
-    # # # print(len(sim.people))
-    # # # sim.time_step()
-    # # # print('vacinated pop')
-    # # # print (len(sim.vaccinated_population))
-    # sim.run()
     cli_virus = Virus(cli_virus_name, cli_virus_mortality, cli_virus_repro)
     cli_simulation = Simulation(cli_virus, cli_pop_size, cli_vacc_percentage, cli_initial_infected)
     cli_simulation.run()
