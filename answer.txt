@@ -10,5 +10,10 @@ reproductive rate: 0.25
 People Initially Infected: 15
 
 What percentage of the population became infected at some point before the virus burned out?
+About 30% of the population became infected before the virus burnt out.
+
 What percentage of the population died from the virus?
+about 15% of the population died from the virus
+
 Out of all interactions sick individuals had during the entire simulation, how many times, in total, did a vaccination save someone from potentially becoming infected?
+When a person was vaccinated, they did not die from the virus because of how I coded my simulation.
